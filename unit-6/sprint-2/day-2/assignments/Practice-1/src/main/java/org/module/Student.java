@@ -13,6 +13,7 @@ public class Student {
 
     @Embedded
     @ElementCollection(fetch = FetchType.EAGER)
+    @JoinTable(name = "address", joinColumns = @JoinColumn(name = "Student_id"))
     private List<Address> address = new ArrayList<>();
 
     public Student(){}
