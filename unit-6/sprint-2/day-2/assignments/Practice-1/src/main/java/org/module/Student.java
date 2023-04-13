@@ -1,8 +1,8 @@
 package org.module;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Student {
@@ -12,12 +12,12 @@ public class Student {
     private int marks;
 
     @Embedded
-    @ElementCollection
-    private Set<Address> address = new HashSet<>();
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<Address> address = new ArrayList<>();
 
     public Student(){}
 
-    public Student(int id, String name, int marks, Set<Address> address) {
+    public Student(int id, String name, int marks, List<Address> address) {
         this.id = id;
         this.name = name;
         this.marks = marks;
@@ -48,11 +48,11 @@ public class Student {
         this.marks = marks;
     }
 
-    public Set<Address> getAddress() {
+    public List<Address> getAddress() {
         return address;
     }
 
-    public void setAddress(Set<Address> address) {
+    public void setAddress(List<Address> address) {
         this.address = address;
     }
 

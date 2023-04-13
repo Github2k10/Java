@@ -3,7 +3,9 @@ package org.usecase;
 import org.dao.StudentDAO;
 import org.module.Address;
 import org.module.Student;
+import org.util.EMUtil;
 
+import javax.persistence.EntityManager;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,30 +13,37 @@ public class Main {
     public static void main(String[] args) {
         StudentDAO dao = new StudentDAO();
 
-        Address home = new Address();
-        home.setState("Kolkata");
-        home.setCity("Chennai");
-        home.setPincode("110088");
-        home.setType("home");
+//        Address home = new Address();
+//        home.setState("Kolkata");
+//        home.setCity("Chennai");
+//        home.setPincode("110088");
+//        home.setType("home");
+//
+//        Address office = new Address();
+//        office.setState("Koichi");
+//        office.setCity("Chennai");
+//        office.setPincode("110458");
+//        office.setType("office");
+//
+//        Student student = new Student();
+//        student.setId(1);
+//        student.setName("Ron");
+//        student.setMarks(96);
+//        student.getAddress().add(home);
+//        student.getAddress().add(office);
+//
+//        String out = dao.insertStudent(student);
 
-        Address office = new Address();
-        office.setState("Koichi");
-        office.setCity("Chennai");
-        office.setPincode("110458");
-        office.setType("office");
+        EntityManager em = EMUtil.getEntityManger();
 
-        Set<Address> set = new HashSet<>();
-        set.add(home);
-        set.add(office);
+        Student student = em.find(Student.class, 1);
+        em.close();
+        System.out.println(student.getId());
+        System.out.println(student.getName());
+        System.out.println(student.getMarks());
 
-        Student student = new Student();
-        student.setId(1);
-        student.setName("Ron");
-        student.setMarks(96);
-        student.setAddress(set);
-
-        String out = dao.insertStudent(student);
-
-        System.out.println(out);
+        for(Address a : student.getAddress()){
+            System.out.println(a);
+        }
     }
 }

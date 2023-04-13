@@ -12,7 +12,7 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd" version="2.0">
                       value="jdbc:mysql://localhost:3306/practice"/>
 
             <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
         </properties>
     </persistence-unit>
 </persistence>
