@@ -1,6 +1,5 @@
 package com.masai;
 
-import java.util.Comparator;
 import java.util.Objects;
 
 public class Student implements Comparable<Student>{
@@ -64,7 +63,6 @@ public class Student implements Comparable<Student>{
 
 	@Override
 	public int compareTo(Student o) {
-		// TODO Auto-generated method stub
 		return Integer.compare(this.getMarks(), o.getMarks());
 	}
 
