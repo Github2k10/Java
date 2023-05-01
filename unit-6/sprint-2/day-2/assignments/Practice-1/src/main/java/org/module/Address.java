@@ -1,18 +1,32 @@
 package org.module;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Address {
+
+    @Id
+    private int aid;
     private String state;
     private String city;
     private String pincode;
-    private String type;
 
-    public Address(){}
-
-    public Address(String state, String city, String pincode, String type) {
+    public Address(int aid, String state, String city, String pincode) {
+        this.aid = aid;
         this.state = state;
         this.city = city;
         this.pincode = pincode;
-        this.type = type;
+    }
+
+    public Address(){}
+
+    public int getAid() {
+        return aid;
+    }
+
+    public void setAid(int aid) {
+        this.aid = aid;
     }
 
     public String getState() {
@@ -39,21 +53,13 @@ public class Address {
         this.pincode = pincode;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     @Override
     public String toString() {
         return "Address{" +
-                "state='" + state + '\'' +
+                "aid=" + aid +
+                ", state='" + state + '\'' +
                 ", city='" + city + '\'' +
                 ", pincode='" + pincode + '\'' +
-                ", type='" + type + '\'' +
                 '}';
     }
 }

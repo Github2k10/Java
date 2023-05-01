@@ -6,44 +6,44 @@ import org.module.Student;
 import org.util.EMUtil;
 
 import javax.persistence.EntityManager;
-import java.util.HashSet;
-import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
-        StudentDAO dao = new StudentDAO();
+        EntityManager em = EMUtil.getEntityManger();
 
-        Address home = new Address();
-        home.setState("Kolkata");
-        home.setCity("Chennai");
-        home.setPincode("110088");
-        home.setType("home");
+        Address address = new Address();
+        address.setAid(1);
+        address.setState("Mumbai");
+        address.setCity("Maharashtra");
+        address.setPincode("147852369");
 
-        Address office = new Address();
-        office.setState("Koichi");
-        office.setCity("Chennai");
-        office.setPincode("110458");
-        office.setType("office");
+//        Address address1 = new Address();
+//        address1.setAid(2);
+//        address1.setState("Pune");
+//        address1.setCity("Maharashtra");
+//        address1.setPincode("147852369");
 
         Student student = new Student();
-        student.setId(1);
         student.setName("Ron");
-        student.setMarks(96);
-        student.getAddress().add(home);
-        student.getAddress().add(office);
+        student.setAddress(address);
 
-        String out = dao.insertStudent(student);
+        Student student1 = new Student();
+        student1.setName("Tom");
+        student1.setAddress(address);
 
-//        EntityManager em = EMUtil.getEntityManger();
-//
-//        Student student = em.find(Student.class, 1);
-//        em.close();
-//        System.out.println(student.getId());
-//        System.out.println(student.getName());
-//        System.out.println(student.getMarks());
-//
-//        for(Address a : student.getAddress()){
-//            System.out.println(a);
-//        }
+        Student student2 = new Student();
+        student2.setName("Jon");
+        student2.setAddress(address);
+
+        em.getTransaction().begin();
+        em.persist(student);
+        em.persist(student1);
+        em.persist(student2);
+        em.getTransaction().commit();
+        em.close();
+
+        System.out.println(student);
+        System.out.println(student1);
+        System.out.println(student2);
     }
 }
