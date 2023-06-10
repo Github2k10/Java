@@ -16,7 +16,8 @@ public class MyAppConfig {
 	@Bean
 	public SecurityFilterChain mySecurityConfig(HttpSecurity http) throws Exception{
 		http.authorizeHttpRequests( (auth) -> {
-			auth.requestMatchers("/welcome", "/register").permitAll()
+			auth.requestMatchers("/welcome", "/register", "/welcome/{username}").permitAll()
+			 	.requestMatchers("/swagger-ui*/**","/v3/api-docs/**").permitAll()
 				.requestMatchers("/hello").authenticated()
 				.requestMatchers("/admin").hasRole("admin");
 		}).csrf().disable().httpBasic();
@@ -26,6 +27,6 @@ public class MyAppConfig {
 	
 	@Bean
 	 public PasswordEncoder passwordEncoder() {
-	        return NoOpPasswordEncoder.getInstance();
+	        return new BCryptPasswordEncoder();
 	 }
 }
